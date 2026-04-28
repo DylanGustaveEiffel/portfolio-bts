@@ -3,7 +3,8 @@ import { PortfolioContext } from '../context/PortfolioContext';
 import { Link } from 'react-router-dom';
 
 export default function ApList() {
-  const { apData } = useContext(PortfolioContext);
+  // On récupère openModal en plus de apData ici 👇
+  const { apData, openModal } = useContext(PortfolioContext);
   const [filter, setFilter] = useState('all');
 
   const b1Filters = ['B1.1', 'B1.2', 'B1.3', 'B1.4', 'B1.5', 'B1.6'];
@@ -22,8 +23,9 @@ export default function ApList() {
         {b1Filters.map(f => (
           <button key={f} className={`filt-btn ${filter === f ? 'active' : ''}`} onClick={() => setFilter(f)}>{f}</button>
         ))}
-        {/* On suppose que l'ouverture de la modal sera gérée depuis App ou via Context */}
-        <button className="btn-add" onClick={() => alert('Ouvrir la modale (Logique à relier)')}>+ Nouvelle AP</button>
+        
+        {/* On a remplacé l'alerte par openModal() ici 👇 */}
+        <button className="btn-add" onClick={() => openModal()}>+ Nouvelle AP</button>
       </div>
 
       <div className="ap-grid" id="ap-container">
